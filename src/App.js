@@ -15,9 +15,9 @@ function App() {
       {/* <Header/> */}
       {/* <CardContainer/> */}
       {/* <ChartContainer/> */}
-      {/* <WavyChart/> */}
-      <Login/>
-      {/* <Register/> */}
+      <WavyChart/>
+      {/* <Login/>
+      <Register/> */}
       {/* <SideBar/> */}
     </div>
   );

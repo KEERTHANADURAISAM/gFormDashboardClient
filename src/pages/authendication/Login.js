@@ -8,8 +8,14 @@ import {
   Typography,
   Button,
 } from "@mui/material";
+import { useSelector } from "react-redux";
+import { userRegister } from "../slices/userAuth";
 
 const Login = () => {
+  const currentUser = useSelector((state) => state.userRegister); // Assuming `user` is your slice's name
+
+// Log the current user data from the Redux store
+console.log('Current User Data:', currentUser)
      // State to hold form data
   const [formData, setFormData] = useState({
     
@@ -28,13 +34,13 @@ const Login = () => {
  // Handle form submission
  const handleSubmit = (e) => {
     e.preventDefault(); // Prevent page reload
-    console.log("Form Submitted:", formData);
+    console.log("Form Submitted:", currentUser);
     // You can add further actions like sending form data to an API here
   };
 
-//   useEffect(() => {
-//     console.log(formData);
-//   }, [formData]); 
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]); 
   return (
     <Grid
       container
@@ -42,7 +48,7 @@ const Login = () => {
       alignItems="center"
       style={{ minHeight: "100vh" }} // Vertically center the Card
     >
-      <Card sx={{ width: "400px", padding: "30px", boxShadow: 3 }}>
+      <Card sx={{ width: "350px", padding: "30px", boxShadow: 3 }}>
 <form  onSubmit={handleSubmit}>
         <FormControl fullWidth>
           <Grid container spacing={3}>
