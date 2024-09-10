@@ -1,5 +1,6 @@
+
 import React, { useState } from 'react';
-import { BarChart as RechartsBarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 // Function to generate short form of weekly data
 const generateWeeklyData = (weeks, minUsers, maxUsers, minForms, maxForms) => {
@@ -16,7 +17,7 @@ const generateWeeklyData = (weeks, minUsers, maxUsers, minForms, maxForms) => {
   return data;
 };
 
-const BarChart = () => {
+const LineCHart= () => {
   // State to toggle between weekly and monthly data
   const [view, setView] = useState('Weekly');
 
@@ -27,28 +28,24 @@ const BarChart = () => {
   const data = view === 'Weekly' ? weeklyData : [];
 
   return (
-    <div style={{backgroundColor:"#FFFFFF",width:'300px',height:'400px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',padding:'20px' }}>
-     <p>This Week Form Responses</p>
-      <ResponsiveContainer width={300} height={400}>
-        <RechartsBarChart data={data}>
+    <div style={{ backgroundColor: "#FFFFFF", width: '300px', height: '400px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)', padding: '20px' }}>
+      <p>This Week Form Responses</p>
+      <ResponsiveContainer width="100%" height="100%">
+        <LineChart data={data}>
           {/* <CartesianGrid strokeDasharray="3 3" /> */}
           <XAxis dataKey="name" />
           {/* <YAxis /> */}
           <Tooltip content={<CustomTooltip />} />
           <Legend />
-
-          {/* Bars for Users */}
-          <Bar
+          <Line
+            type="monotone"
             dataKey="users"
             stroke="#3b82f6"
-            fill="#5BADA9" // Light blue
-            name="Responses"
-            radius={[8, 8, 8, 8]} // Rounded corners for the bars
+            dot={{ stroke: '#3b82f6', strokeWidth: 2 }}
+            activeDot={{ r: 8 }}
           />
-          
-          {/* Bars for Forms (optional) */}
-        
-        </RechartsBarChart>
+          {/* Add a second Line component if you want to plot 'forms' */}
+        </LineChart>
       </ResponsiveContainer>
     </div>
   );
@@ -60,11 +57,11 @@ const CustomTooltip = ({ active, payload, label }) => {
       <div className="custom-tooltip">
         <p className="label">{`${label}`}</p>
         <p>Users: {payload[0].value}</p>
-        <p>Forms: {payload[1]?.value || 'N/A'}</p>
+        {/* If you have a second dataKey for forms, you can show it here */}
       </div>
     );
   }
   return null;
 };
 
-export default BarChart;
+export default LineCHart;

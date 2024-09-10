@@ -54,10 +54,12 @@ const WavyChart = () => {
   const combinedData = [...monthlyData, ...weeklyData];
 
   return (
+    <div style={{backgroundColor:"#FFFFFF",width:'700px',height:'400px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',padding:'20px' }}>
+ <p>Unique Visitor</p>
     <ResponsiveContainer width={700} height={400}>
       
       <AreaChart data={combinedData}>
-        <CartesianGrid strokeDasharray="3 3" />
+        {/* <CartesianGrid strokeDasharray="3 3" /> */}
         <XAxis dataKey="name" />
         <YAxis />
         <Tooltip content={<CustomTooltip/>}/>
@@ -78,6 +80,7 @@ const WavyChart = () => {
         />
       </AreaChart>
     </ResponsiveContainer>
+    </div>
 );
 };
 
