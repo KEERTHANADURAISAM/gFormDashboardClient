@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import { userRegister } from "../slices/userAuth";
 
 const Login = () => {
-  const currentUser = useSelector((state) => state.userRegister); // Assuming `user` is your slice's name
+  const currentUser = useSelector((State) => State.user); // Assuming `user` is your slice's name
 
 // Log the current user data from the Redux store
 console.log('Current User Data:', currentUser)

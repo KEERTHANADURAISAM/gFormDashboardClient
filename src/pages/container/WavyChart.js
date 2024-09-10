@@ -1,64 +1,116 @@
-import React, { useState } from 'react';
-import { LineChart } from '@mui/x-charts';
+import React from "react";
+import {
+  Area,
+  AreaChart,
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+} from "recharts";
+
+// Function to generate dynamic monthly data
+// Generate short form of monthly data
+const generateMonthlyData = (months, minUsers, maxUsers, minForms, maxForms) => {
+  const monthNames = [
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+  ];
+
+  const data = [];
+  for (let i = 0; i < months; i++) {
+    data.push({
+      name: monthNames[i],  // Use short form month name
+      users: Math.floor(Math.random() * (maxUsers - minUsers + 1)) + minUsers,
+      forms: Math.floor(Math.random() * (maxForms - minForms + 1)) + minForms,
+    });
+  }
+  return data;
+};
+
+// Generate short form of weekly data
+const generateWeeklyData = (weeks, minUsers, maxUsers, minForms, maxForms) => {
+  const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+  const data = [];
+  for (let i = 0; i < weeks; i++) {
+    data.push({
+      name: weekDays[i],  // Use short form weekday name
+      users: Math.floor(Math.random() * (maxUsers - minUsers + 1)) + minUsers,
+      forms: Math.floor(Math.random() * (maxForms - minForms + 1)) + minForms,
+    });
+  }
+  return data;
+};
+
 
 const WavyChart = () => {
-  const [view, setView] = useState('week');
+  // Generate monthly and weekly data
+  const monthlyData = generateMonthlyData(12, 100, 300, 80, 250); // 12 months
+  const weeklyData = generateWeeklyData(4, 100, 300, 80, 250); // 4 weeks
 
-  // Weekly data
-  const weeklyData = {
-    xAxis: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-    series: [
-      {
-        label: 'Page Views',
-        data: [30, 50, 28, 35, 55, 95, 75],
-        color: 'rgba(54, 162, 235, 1)', // Line color
-      },
-      {
-        label: 'Sessions',
-        data: [20, 40, 45, 55, 65, 85, 70],
-        color: '#003EB3', // Line color
-      },
-    ],
-  };
-
-  // Monthly data
-  const monthlyData = {
-    xAxis: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-    series: [
-      {
-        label: 'Page Views',
-        data: [125, 175, 150, 225, 275, 325, 375, 400, 425, 475, 500, 525],
-        color: '#4877CD', // Line color
-      },
-      {
-        label: 'Sessions',
-        data: [300, 400, 320, 500, 600, 700, 800, 850, 900, 1000, 1050, 1100],
-        color: '#1777FF', // Line color
-      },
-    ],
-  };
-
-  // Choose the correct data based on view
-  const data = view === 'week' ? weeklyData : monthlyData;
+  // Merge the data
+  const combinedData = [...monthlyData, ...weeklyData];
 
   return (
-    <div>
-      <button onClick={() => setView('week')}>Weekly View</button>
-      <button onClick={() => setView('month')}>Monthly View</button>
+    <ResponsiveContainer width={700} height={400}>
+      
+      <AreaChart data={combinedData}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip content={<CustomTooltip/>}/>
+        <Legend />
+        <Area
+          type="monotone"
+          dataKey="users"
+          stroke="#3b82f6"
+          fill="#3b82f6"
+          name="users"
+        />
+        <Area
+          type="monotone"
+          dataKey="forms"
+          stroke="#2563eb"
+          fill="#2563eb"
+          name="Forms"
+        />
+      </AreaChart>
+    </ResponsiveContainer>
+);
+};
 
-      {/* Use the LineChart component */}
-      <LineChart
-        width={500}
-        height={300}
-        xAxis={[{ data: data.xAxis }]} // Correct xAxis formatting
-        series={data.series.map((seriesItem) => ({
-          label: seriesItem.label,
-          data: seriesItem.data,
-          color: seriesItem.color, // Set color directly
-        }))} // Map series correctly
-      />
-    </div>
-  );
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="custom-tooltip">
+        <p className="label">{`${label}`}</p>
+        <p>{`Users: ${payload[0].value}`}</p>
+        <p>{`Forms: ${payload[1].value}`}</p>
+      </div>
+    );
+  }
+  return null;
 };
 
 export default WavyChart;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
