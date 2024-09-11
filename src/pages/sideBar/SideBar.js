@@ -14,6 +14,7 @@ import ListAltIcon from '@mui/icons-material/ListAlt';
 import Person4Icon from '@mui/icons-material/Person4';
 import PublicIcon from '@mui/icons-material/Public';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+import { Link } from 'react-router-dom';
 
 
 
@@ -44,7 +45,9 @@ const SideBar = () => {
           <ListItemIcon>
             <SpeedIcon />
           </ListItemIcon>
+          <Link to='/home' className='Link'>
           <ListItemText>Dashboard</ListItemText>
+          </Link>
         </ListItem>
         <ListItem>
           <ListItemText>Authentication</ListItemText>
@@ -53,13 +56,15 @@ const SideBar = () => {
           <ListItemIcon>
             <PowerSettingsNewIcon />
           </ListItemIcon>
+          <Link to='/login' className='Link'>
           <ListItemText>Login</ListItemText>
+          </Link>
         </ListItem>
         <ListItem sx={{ display: "flex", alignItems: "center" }}>
           <ListItemIcon>
             <EventNoteIcon />
           </ListItemIcon>
-          <ListItemText>Register</ListItemText>
+          <Link to='/register' className='Link'>Register</Link>
         </ListItem>
         <ListItem>
           <ListItemText>Utilities</ListItemText>
@@ -74,7 +79,9 @@ const SideBar = () => {
           <ListItemIcon>
             <Person4Icon />
           </ListItemIcon>
+          <Link to='/user'className='Link'>
           <ListItemText>Users</ListItemText>
+          </Link>
         </ListItem>
         <ListItem>
           <ListItemText>Support</ListItemText>

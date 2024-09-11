@@ -5,3 +5,11 @@
 body{
   background-color: #FAFAFB;
 }
+.Link{
+  text-decoration: none;
+}
+.HomeLayoutComponents{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}

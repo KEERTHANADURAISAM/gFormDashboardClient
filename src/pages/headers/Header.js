@@ -5,8 +5,11 @@ import SearchIcon from '@mui/icons-material/Search';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import SideBar from '../sideBar/SideBar';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
+  const currentUser = useSelector((State) => State.user);
+
   return (
     <section>
      
@@ -37,7 +40,9 @@ const Header = () => {
     <Box sx={{ display:"flex", justifyContent:"flex-end", alignItems:"center" }}>
       <MenuItem>
         <IconButton>
+          <a href='https://github.com/KEERTHANADURAISAM/adminDashboardClient' target='blank'>
           <GitHubIcon sx={{ color:"black" }} />
+          </a>
         </IconButton>
       </MenuItem>
       <MenuItem>
@@ -57,7 +62,8 @@ const Header = () => {
         </IconButton>
       </MenuItem>
       <MenuItem sx={{ color:"black" }}>
-     <span> Keerthana Duraisamy </span>
+      <span>{currentUser.firstName && currentUser.lastName ? `${currentUser.firstName} ${currentUser.lastName}` : 'Guest'}</span>
+
       </MenuItem>
     </Box>
 

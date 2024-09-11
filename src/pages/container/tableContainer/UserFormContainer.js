@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TablePagination } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TablePagination, Box, Typography } from '@mui/material';
 
 const UserFormContainer = () => {
   // Sample data with 20 entries
@@ -31,7 +31,9 @@ const UserFormContainer = () => {
   const paginatedData = data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   return (
-    <Paper sx={{ boxShadow: 3, borderRadius: 1, width: "800px" }}>
+    <Box>
+      <Typography>Recent Reports</Typography>
+    <Paper sx={{ boxShadow: 3, borderRadius: 1, width: "750px",height:"440px",marginTop:"10px" }}>
       <TableContainer>
         <Table>
           <TableHead>
@@ -68,6 +70,7 @@ const UserFormContainer = () => {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
+    </Box>
   );
 };
 

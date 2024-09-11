@@ -35,7 +35,7 @@ const CardContainer = () => {
     ];
 
     return (
-        <div style={{ display: 'flex', gap: '40px', flexWrap: 'wrap',marginTop:"70px",marginLeft:"80px" }}>
+        <div style={{ display: 'flex', gap: '40px', flexWrap: 'wrap',marginTop:"95px",marginLeft:"80px" }}>
             {datas.map((item) => (
                 <Card key={item.id} sx={{ minWidth: 255, padding: 0 }}>
                     <CardContent>

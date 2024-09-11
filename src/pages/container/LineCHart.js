@@ -1,4 +1,5 @@
 
+import { Box, Divider, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
@@ -28,11 +29,35 @@ const LineCHart= () => {
   const data = view === 'Weekly' ? weeklyData : [];
 
   return (
-    <div style={{ backgroundColor: "#FFFFFF", width: '300px', height: '400px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)', padding: '20px' }}>
-      <p>This Week Form Responses</p>
-      <ResponsiveContainer width="100%" height="100%">
+    <Box>
+      <Typography>Analytics Report</Typography>
+    <div style={{ backgroundColor: "#FFFFFF", width: '350px', height: '400px',marginTop:"10px", boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)', padding: '20px' }}>
+     <Box sx={{ display: 'flex', flexDirection: 'column', width: '300px' }}>
+      {/* Active Users */}
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+        <Typography>Active Users (This Week)</Typography>
+        <Typography>35</Typography>
+      </Box>
+      <Divider sx={{ mb: 1}} />
+
+      {/* Forms Created This Week */}
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+        <Typography>Forms Created This Week</Typography>
+        <Typography>60</Typography>
+      </Box>
+      <Divider sx={{ mb: 1 }} />
+
+      {/* Responses Received This Week */}
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+        <Typography>Responses Received This Week</Typography>
+        <Typography>120</Typography>
+      </Box>
+      <Divider sx={{ mb: 1 }} />
+    </Box>
+
+      <ResponsiveContainer width="100%" height="70%">
         <LineChart data={data}>
-          {/* <CartesianGrid strokeDasharray="3 3" /> */}
+          <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
           {/* <YAxis /> */}
           <Tooltip content={<CustomTooltip />} />
@@ -48,6 +73,7 @@ const LineCHart= () => {
         </LineChart>
       </ResponsiveContainer>
     </div>
+    </Box>
   );
 };
 
