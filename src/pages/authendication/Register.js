@@ -16,11 +16,9 @@ import { userRegister } from "../slices/userAuth";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 const Register = () => {
-  // State to toggle password visibility
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
 
-  // State to hold form data
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -28,21 +26,17 @@ const Register = () => {
     password: "",
   });
 
-  // Handle form submission
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent page reload
-    // console.log("Form Submitted:", formData);
+    e.preventDefault();
     const { firstName, lastName, email, password } = formData;
-    // Dispatching the userRegister action with form data as the payload
     dispatch(userRegister({ firstName, lastName, email, password }));
   };
 
-  // Handle input change
   const handleChange = (e) => {
-    const { name, value } = e.target; // Destructure name and value from the event target
+    const { name, value } = e.target;
     setFormData({
-      ...formData, // Spread the existing form data
-      [name]: value, // Update the field that was changed
+      ...formData,
+      [name]: value,
     });
   };
 
@@ -53,12 +47,28 @@ const Register = () => {
       container
       justifyContent="center"
       alignItems="center"
-      style={{ minHeight: "100vh" }} // Vertically center the Card
+      sx={{ minHeight: "100vh" }} // Vertically center the Card
     >
-      <Card sx={{ width: "400px", padding: "30px", boxShadow: 3 }}>
+      <Card
+        sx={{
+          padding: "30px",
+          boxShadow: 3,
+          width: {
+            xs: "100%",   // Full width on small devices
+            sm: "400px",  // Set width on small devices
+            md: "450px",  // Slightly larger on medium devices
+            lg: "500px",  // Larger width on large devices
+            xl: "600px",  // Maximum width for extra large devices
+          },
+          padding: {
+            xs: "20px",   // Reduce padding on small devices
+            sm: "30px",   // Normal padding on larger devices
+          },
+        }}
+      >
         <form onSubmit={handleSubmit}>
           <FormControl fullWidth>
-            <Grid container spacing={3}>
+            <Grid container spacing={2}>
               <Grid item xs={6}>
                 <Typography variant="h5" component="div">
                   Sign Up
@@ -71,8 +81,8 @@ const Register = () => {
               </Grid>
             </Grid>
 
-            <Grid container spacing={3} sx={{ marginTop: "20px" }}>
-              <Grid item xs={6}>
+            <Grid container spacing={2} sx={{ marginTop: "20px" }}>
+              <Grid item xs={12} sm={6}>
                 <FormLabel>First Name*</FormLabel>
                 <TextField
                   fullWidth
@@ -84,7 +94,7 @@ const Register = () => {
                   onChange={handleChange}
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6}>
                 <FormLabel>Last Name*</FormLabel>
                 <TextField
                   fullWidth
@@ -137,10 +147,10 @@ const Register = () => {
                   type="submit"
                   sx={{
                     marginTop: "10px",
-                    width: "200px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
+                    width: {
+                      xs: "100%",    // Full width on small devices
+                      sm: "200px",   // Normal button size on larger devices
+                    },
                   }}
                 >
                   Create Account

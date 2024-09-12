@@ -13,3 +13,39 @@ body{
   flex-direction: column;
   justify-content: flex-start;
 }
+.custom-tooltip {
+  background-color: #ffffff; /* Dark background for contrast */
+  color: blue; /* Light text color */
+  padding: 10px; /* Add some padding */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Drop shadow for depth */
+  font-family: 'Arial', sans-serif; /* Clean font */
+  font-size: 14px; /* Text size */
+  transition: all 0.3s ease; /* Smooth transition */
+}
+
+.custom-tooltip p {
+  margin: 0;
+  padding: 5px 0;
+}
+
+.custom-tooltip .label {
+  font-weight: bold;
+  font-size: 16px; /* Larger label text */
+  border-bottom: 1px solid #ecf0f1; /* Underline for distinction */
+  margin-bottom: 5px;
+}
+
+.custom-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%; /* Position below the tooltip */
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: #ffffff transparent transparent transparent; /* Arrow */
+}
+.recharts-bar-rectangle:hover {
+  fill:none !important; /* Removes hover color change */
+}

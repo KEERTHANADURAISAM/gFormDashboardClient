@@ -59,7 +59,7 @@ const BarChart = () => {
             {/* Bars for Users */}
             <Bar
               dataKey="users"
-              stroke="#3b82f6"
+              // stroke="#3b82f6"
               fill="#5BADA9" // Light blue
               name="Responses"
               barSize={20}

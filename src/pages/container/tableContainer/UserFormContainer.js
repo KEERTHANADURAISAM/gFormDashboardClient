@@ -31,45 +31,62 @@ const UserFormContainer = () => {
   const paginatedData = data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   return (
-    <Box>
-      <Typography>Recent Reports</Typography>
-    <Paper sx={{ boxShadow: 3, borderRadius: 1, width: "750px",height:"440px",marginTop:"10px" }}>
-      <TableContainer>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>User Name</TableCell>
-              <TableCell>Form Title</TableCell>
-              <TableCell>Response</TableCell>
-              <TableCell>Status</TableCell>
-              <TableCell>Total Creation</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {paginatedData.map((row) => (
-              <TableRow key={row.id}>
-                <TableCell>{row.id}</TableCell>
-                <TableCell>{row.userName}</TableCell>
-                <TableCell>{row.formTitle}</TableCell>
-                <TableCell>{row.response}</TableCell>
-                <TableCell>{row.status}</TableCell>
-                <TableCell>{row.totalCreation}</TableCell>
+    <Box
+      sx={{
+        padding: { xs: '10px', sm: '20px', md: '30px' }, // Adjust padding based on screen size
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
+      <Typography variant="h6" sx={{ marginBottom: '10px' }}>
+        Recent Reports
+      </Typography>
+      <Paper
+        sx={{
+          boxShadow: 3,
+          borderRadius: 1,
+          width: { xs: '100%', sm: '90%', md: '750px' }, // Adjust width based on screen size
+          height: { xs: 'auto', md: '440px' }, // Adjust height based on screen size
+          marginTop: '10px',
+        }}
+      >
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>ID</TableCell>
+                <TableCell>User Name</TableCell>
+                <TableCell>Form Title</TableCell>
+                <TableCell>Response</TableCell>
+                <TableCell>Status</TableCell>
+                <TableCell>Total Creation</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[5, 10, 20]}
-        component="div"
-        count={data.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Paper>
+            </TableHead>
+            <TableBody>
+              {paginatedData.map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell>{row.id}</TableCell>
+                  <TableCell>{row.userName}</TableCell>
+                  <TableCell>{row.formTitle}</TableCell>
+                  <TableCell>{row.response}</TableCell>
+                  <TableCell>{row.status}</TableCell>
+                  <TableCell>{row.totalCreation}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 20]}
+          component="div"
+          count={data.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      </Paper>
     </Box>
   );
 };

@@ -8,14 +8,13 @@ import {
   YAxis,
   Tooltip,
   Legend,
-  
 } from "recharts";
 
 // Function to generate dynamic monthly data
 const generateMonthlyData = (months, minUsers, maxUsers, minForms, maxForms) => {
   const monthNames = [
     "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
   ];
 
   const data = [];
@@ -59,26 +58,43 @@ const WavyChart = () => {
 
   return (
     <div>
-      <Box sx={{display:"flex",justifyContent:"space-between"}}>
-      <p>Unique Visitor</p>
-      
-      {/* Button Group to Toggle Between Views */}
-      <ButtonGroup variant="outlined" sx={{ marginBottom: "20px",display:"flex" }}>
-        <Button onClick={() => setView('Week')}>Week</Button>
-        <Button onClick={() => setView('Month')}>Month</Button>
-        <Button onClick={() => setView('Both')}>Both</Button>
-      </ButtonGroup>
+      <Box sx={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap" }}>
+        <p>Unique Visitor</p>
+
+        {/* Button Group to Toggle Between Views */}
+        <ButtonGroup variant="outlined" sx={{ marginBottom: "20px" }}>
+          <Button onClick={() => setView('Week')}>Week</Button>
+          <Button onClick={() => setView('Month')}>Month</Button>
+          <Button onClick={() => setView('Both')}>Both</Button>
+        </ButtonGroup>
       </Box>
-      <div
-        style={{
+
+      <Box
+        sx={{
           backgroundColor: "#FFFFFF",
-          width: "700px",
-          height: "400px",
           boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
           padding: "20px",
+          width: {
+            xs: "100%",    // Full width on extra small devices
+            sm: "90%",     // Slightly smaller width on small devices
+            md: "85%",     // Medium width on medium devices
+            lg: "700px",   // Fixed width on large devices
+          },
+          height: {
+            xs: "300px",   // Reduced height on small devices
+            sm: "350px",   // Adjusted height for small devices
+            md: "400px",   // Medium height for larger devices
+            lg: "400px",   // Same height for large devices
+          },
+          padding: {
+            xs: "20px",    // Less padding on small screens
+            sm: "15px",    // Normal padding on small screens
+            md: "20px",    // Standard padding on larger screens
+          },
+          margin: "0 auto", // Center the chart
         }}
       >
-        <ResponsiveContainer width={700} height={400}>
+        <ResponsiveContainer width="100%" height="100%">
           <AreaChart data={data}>
             <XAxis dataKey="name" />
             <YAxis />
@@ -100,7 +116,7 @@ const WavyChart = () => {
             />
           </AreaChart>
         </ResponsiveContainer>
-      </div>
+      </Box>
     </div>
   );
 };
@@ -108,11 +124,11 @@ const WavyChart = () => {
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="custom-tooltip">
+      <Box className="custom-tooltip">
         <p className="label">{`${label}`}</p>
         <p>{`Users: ${payload[0].value}`}</p>
         <p>{`Forms: ${payload[1].value}`}</p>
-      </div>
+      </Box>
     );
   }
   return null;

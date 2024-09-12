@@ -1,6 +1,6 @@
-import { Box, Checkbox, Divider, FormControl, FormControlLabel, MenuItem, Select, Typography } from '@mui/material';
-import React, { useState } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import React, { useState } from "react";
+import { Box, Checkbox, Divider, FormControl, FormControlLabel, MenuItem, Select, Typography } from "@mui/material";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 const ResponseBar = () => {
   // Function to generate short form of weekly data
@@ -40,62 +40,88 @@ const ResponseBar = () => {
   };
 
   return (
-    <Box>
-    <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-    <Typography sx={{marginTop:2}}>Form Responses</Typography>
-    <Typography>
-      <FormControl sx={{ minWidth: 120 }}>
-        <Select
-          value={time}
-          onChange={handleChange}
-          inputProps={{ 'aria-label': 'Without label' }}
-        >
-          <MenuItem value={30}>This Month</MenuItem>
-          <MenuItem value={7}>This Week</MenuItem>
-          <MenuItem value={12}>This Year</MenuItem>
-        </Select>
-      </FormControl>
-    </Typography>
-  </Box>
-    <div style={{ backgroundColor: "#FFFFFF", width: '650px', height: '400px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)', padding: '20px' }}>
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        {/* Active Users */}
-      
-        {/* Forms Created This Week */}
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-          <Typography>12250</Typography>
-          <Typography>
-            <FormControlLabel control={<Checkbox defaultChecked sx={{ color: "#FAAD14", // Color of the checkbox when unchecked
-        '&.Mui-checked': {
-          color: "#FAAD14", // Color of the checkbox when checked
-        },}}/>} label="New Arrivals" onChange={handleChangeChecked} />
-            <FormControlLabel control={<Checkbox defaultChecked/>} label="Old Responses" onChange={handleChangeChecked} />
-          </Typography>
-        </Box>
-        <Divider sx={{ mb: 1 }} />
+    <Box
+      sx={{
+        padding: { xs: '10px', sm: '20px', md: '30px' }, // Responsive padding
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+      }}
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          width: '100%',
+          maxWidth: '650px',
+          mb: 1,
+        }}
+      >
+        <Typography sx={{ marginTop: 2 }}>Form Responses</Typography>
+        <FormControl sx={{ minWidth: 120 }}>
+          <Select
+            value={time}
+            onChange={handleChange}
+            inputProps={{ 'aria-label': 'Without label' }}
+          >
+            <MenuItem value={30}>This Month</MenuItem>
+            <MenuItem value={7}>This Week</MenuItem>
+            <MenuItem value={12}>This Year</MenuItem>
+          </Select>
+        </FormControl>
       </Box>
-      <ResponsiveContainer width="100%" height="70%">
-        <BarChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip content={<CustomTooltip />} />
-          <Legend />
-          <Bar
-            dataKey="users"
-            fill="#FAAD14" // Set the color to yellow
-            barSize={12} // Adjust the width of the bars
-            radius={[10, 10, 0, 0]}
-          />
-          <Bar
-            dataKey="forms"
-            fill="#1677FF" // Example color for the second bar
-            barSize={12} // Adjust the width of the bars
-            radius={[10, 10, 0, 0]}
-          />
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
+      <Box
+        sx={{
+          backgroundColor: "#FFFFFF",
+          width: { xs: '100%', sm: '90%', md: '650px' }, // Responsive width
+          height: { xs: 'auto', md: '400px' }, // Adjust height for different screens
+          boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
+          padding: '20px',
+          overflowY: 'auto', // Allow scrolling if content overflows
+          borderRadius: 1,
+        }}
+      >
+        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+          {/* Forms Created This Week */}
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
+            <Typography>12250</Typography>
+            <Box>
+              <FormControlLabel
+                control={<Checkbox defaultChecked sx={{ color: "#FAAD14", '&.Mui-checked': { color: "#FAAD14" } }} />}
+                label="New Arrivals"
+                onChange={handleChangeChecked}
+              />
+              <FormControlLabel
+                control={<Checkbox defaultChecked />}
+                label="Old Responses"
+                onChange={handleChangeChecked}
+              />
+            </Box>
+          </Box>
+          <Divider sx={{ mb: 1 }} />
+        </Box>
+        <ResponsiveContainer width="100%" height={300}> {/* Set a fixed height for the chart */}
+          <BarChart data={data}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip content={<CustomTooltip />} />
+            <Legend />
+            <Bar
+              dataKey="users"
+              fill="#FAAD14" // Set the color to yellow
+              barSize={12} // Adjust the width of the bars
+              radius={[10, 10, 0, 0]}
+            />
+            <Bar
+              dataKey="forms"
+              fill="#1677FF" // Example color for the second bar
+              barSize={12} // Adjust the width of the bars
+              radius={[10, 10, 0, 0]}
+            />
+          </BarChart>
+        </ResponsiveContainer>
+      </Box>
     </Box>
   );
 };
@@ -106,7 +132,6 @@ const CustomTooltip = ({ active, payload, label }) => {
       <div className="custom-tooltip">
         <p className="label">{`${label}`}</p>
         <p>Users: {payload[0].value}</p>
-        {/* If you have a second dataKey for forms, you can show it here */}
         {payload.length > 1 && <p>Forms: {payload[1].value}</p>}
       </div>
     );

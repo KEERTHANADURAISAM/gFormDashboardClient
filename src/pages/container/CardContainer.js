@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import { Card, CardContent, Typography, Button, Box } from '@mui/material';
+import { Card, CardContent, Typography, Button, Box, Grid } from '@mui/material';
 
 const CardContainer = () => {
     const datas = [
@@ -35,28 +35,31 @@ const CardContainer = () => {
     ];
 
     return (
-        <div style={{ display: 'flex', gap: '40px', flexWrap: 'wrap',marginTop:"95px",marginLeft:"80px" }}>
-            {datas.map((item) => (
-                <Card key={item.id} sx={{ minWidth: 255, padding: 0 }}>
-                    <CardContent>
-                        <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 1 }}>
-                           
-                            <Typography variant="h5">{item.header}</Typography>
-                        </Box>
-                        <Box sx={{display:'flex'}}>
-                        <Typography variant="h6" sx={{ marginBottom: 1 }}>{item.count}</Typography>
-                        <TrendingUpIcon sx={{ marginRight: 1 }} />
-                        <Button variant="contained" color="primary" sx={{ marginBottom: 2 }} >
-                            {item.button}
-                        </Button>
-                        </Box>
-                        <Typography variant="body2" color="textSecondary">
-                            {item.text}
-                        </Typography>
-                    </CardContent>
-                </Card>
-            ))}
-        </div>
+        <Box sx={{ flexGrow: 1, marginTop: '95px', marginLeft: '80px' }}>
+            <Grid container spacing={4}>
+                {datas.map((item) => (
+                    <Grid item xs={12} sm={6} md={3} key={item.id}>
+                        <Card sx={{ minWidth: 255, padding: 0 }}>
+                            <CardContent>
+                                <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 1 }}>
+                                    <Typography variant="h5">{item.header}</Typography>
+                                </Box>
+                                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                    <Typography variant="h6" sx={{ marginBottom: 1 }}>{item.count}</Typography>
+                                    <TrendingUpIcon sx={{ marginRight: 1 }} />
+                                    <Button variant="contained" color="primary" sx={{ marginBottom: 2 }}>
+                                        {item.button}
+                                    </Button>
+                                </Box>
+                                <Typography variant="body2" color="textSecondary">
+                                    {item.text}
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                ))}
+            </Grid>
+        </Box>
     );
 }
 
