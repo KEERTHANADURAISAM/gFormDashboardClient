@@ -65,9 +65,9 @@ const LineCHart= () => {
           <Line
             type="monotone"
             dataKey="users"
-            stroke="#3b82f6"
-            dot={{ stroke: '#3b82f6', strokeWidth: 2 }}
-            activeDot={{ r: 8 }}
+            stroke="orange"
+            dot={{ stroke: 'orange', strokeWidth: 2 }}
+            activeDot={{ r: 5 }}
           />
           {/* Add a second Line component if you want to plot 'forms' */}
         </LineChart>
@@ -77,17 +77,67 @@ const LineCHart= () => {
   );
 };
 
+
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="custom-tooltip">
-        <p className="label">{`${label}`}</p>
-        <p>Users: {payload[0].value}</p>
-        {/* If you have a second dataKey for forms, you can show it here */}
-      </div>
+      <Box
+        sx={{
+          width: "120px",
+          backgroundColor: "#FFFFFF",
+          boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.15)",
+          borderRadius: 2,
+          padding: "10px",
+          border: "1px solid #B0BEC5"
+        }}
+      >
+        {/* Tooltip Label */}
+        <Typography variant="subtitle2" sx={{ fontWeight: 'bold', color: '#263238', marginBottom: '8px' }}>
+          {label}
+        </Typography>
+        <Divider sx={{ marginBottom: "8px" }} />
+
+        {/* First Data Point (Series 1) */}
+        <Box sx={{ display: "flex", alignItems: "center", marginBottom: "3px" }}>
+          <Box
+            sx={{
+              width: "10px",
+              height: "10px",
+              borderRadius: "50%",
+              backgroundColor: "orange",
+              marginRight: "8px"
+            }}
+          />
+          <Typography variant="body2" sx={{ color: "#37474F" }}>
+            Series 1: {payload[0].value}
+          </Typography>
+        </Box>
+
+        {/* Optional: Display more series or data points
+        {payload[1] && (
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Box
+              sx={{
+                width: "10px",
+                height: "10px",
+                borderRadius: "50%",
+                backgroundColor: "blue", // Change this to match your second series color
+                marginRight: "8px"
+              }}
+            />
+            <Typography variant="body2" sx={{ color: "#37474F" }}>
+              Series 2: {payload[1].value}
+            </Typography>
+          </Box>
+        )} */}
+      </Box>
     );
   }
+
   return null;
 };
+
+
+
 
 export default LineCHart;

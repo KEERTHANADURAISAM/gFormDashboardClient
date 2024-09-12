@@ -131,12 +131,39 @@ const CustomTooltip = ({ active, payload, label }) => {
     return (
       <div className="custom-tooltip">
         <p className="label">{`${label}`}</p>
-        <p>Users: {payload[0].value}</p>
-        {payload.length > 1 && <p>Forms: {payload[1].value}</p>}
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <span
+            style={{
+              height: '10px',
+              width: '10px',
+              backgroundColor: 'orange',
+              borderRadius: '50%',
+              display: 'inline-block',
+              marginRight: '5px',
+            }}
+          ></span>
+          <p>Users: {payload[0].value}</p>
+        </div>
+        {payload.length > 1 && (
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <span
+              style={{
+                height: '10px',
+                width: '10px',
+                backgroundColor: 'blue',
+                borderRadius: '50%',
+                display: 'inline-block',
+                marginRight: '5px',
+              }}
+            ></span>
+            <p>Forms: {payload[1].value}</p>
+          </div>
+        )}
       </div>
     );
   }
   return null;
 };
+
 
 export default ResponseBar;

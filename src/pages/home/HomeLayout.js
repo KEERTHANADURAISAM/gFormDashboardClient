@@ -13,8 +13,8 @@ const HomeLayout = () => {
   return (
     <div className='HomeLayoutComponents'>
         <Header/>
-        {/* <CardContainer /> */}
-        {/* <ChartContainer/> */}
+        <CardContainer />
+        <ChartContainer/>
         <UserTableContainer/>
       <ResponseContainer/>
       

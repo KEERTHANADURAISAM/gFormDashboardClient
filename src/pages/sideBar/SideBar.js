@@ -45,26 +45,9 @@ const SideBar = () => {
           <ListItemIcon>
             <SpeedIcon />
           </ListItemIcon>
-          <Link to='/home' className='Link'>
+          <Link to='/dashboard' className='Link'>
           <ListItemText>Dashboard</ListItemText>
           </Link>
-        </ListItem>
-        <ListItem>
-          <ListItemText>Authentication</ListItemText>
-        </ListItem>
-        <ListItem sx={{ display: "flex", alignItems: "center" }}>
-          <ListItemIcon>
-            <PowerSettingsNewIcon />
-          </ListItemIcon>
-          <Link to='/login' className='Link'>
-          <ListItemText>Login</ListItemText>
-          </Link>
-        </ListItem>
-        <ListItem sx={{ display: "flex", alignItems: "center" }}>
-          <ListItemIcon>
-            <EventNoteIcon />
-          </ListItemIcon>
-          <Link to='/register' className='Link'>Register</Link>
         </ListItem>
         <ListItem>
           <ListItemText>Utilities</ListItemText>
