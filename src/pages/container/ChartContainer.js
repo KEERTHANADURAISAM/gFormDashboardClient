@@ -11,17 +11,20 @@ const ChartContainer = () => {
         flexDirection: "row",
         gap: "39px",
         padding: "60px",
+        mt:6,
 
         // Media Queries
         "@media (max-width: 1200px)": {
           flexDirection: "row",
           gap: "30px",
           padding: "40px",
+          mt:0,
         },
         "@media (max-width: 900px)": {
           flexDirection: "column",
           gap: "30px",
           padding: "30px",
+          mt:0,
         },
         "@media (max-width: 600px)": {
           flexDirection: "column",
@@ -35,6 +38,7 @@ const ChartContainer = () => {
           // Media Queries for individual charts
           "@media (max-width: 900px)": {
             width: "100%",
+            mt:0,
           },
         }}
       >

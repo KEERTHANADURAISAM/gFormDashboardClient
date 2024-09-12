@@ -9,21 +9,25 @@ const UserTableContainer = () => {
       sx={{
         display: "flex",
         flexDirection: "row",
-        gap: "39px",
-        marginLeft: "60px",
+        gap: "19px",
+        marginLeft: "20px",
+        mt:6,
         '@media (max-width: 1200px)': {
           flexDirection: "column",
           marginLeft: "30px",
+          mt:0,
         },
         '@media (max-width: 900px)': {
           flexDirection: "column",
           gap: "20px",
           marginLeft: "20px",
+          mt:0,
         },
         '@media (max-width: 600px)': {
           flexDirection: "column",
           gap: "10px",
           marginLeft: "10px",
+          mt:0,
         },
       }}
     >

@@ -43,7 +43,7 @@ const BarChart = () => {
           backgroundColor: "#FFFFFF",
           width: "350px",
           height: "400px",
-          marginTop: "40px",
+          marginTop: "35px",
           boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
           padding: "20px",
         }}

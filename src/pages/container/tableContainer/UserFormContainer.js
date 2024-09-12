@@ -1,6 +1,39 @@
-import React, { useState } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TablePagination, Box, Typography } from '@mui/material';
+import React from 'react';
+import { Box, Typography, Paper } from '@mui/material';
+import { DataGrid } from '@mui/x-data-grid';
 
+// StatusIndicator Component
+const StatusIndicator = ({ status }) => {
+  let color;
+  switch (status) {
+    case 'Pending':
+      color = 'orange';
+      break;
+    case 'Completed':
+      color = 'green';
+      break;
+    case 'Rejected':
+      color = 'red';
+      break;
+    default:
+      color = 'grey';
+  }
+
+  return (
+    <Box
+      sx={{
+        width: '7px',
+        height: '7px',
+        borderRadius: '50%',
+        backgroundColor: color,
+        display: 'inline-block',
+        marginRight: '8px',
+      }}
+    />
+  );
+};
+
+// UserFormContainer Component
 const UserFormContainer = () => {
   // Sample data with 20 entries
   const data = Array.from({ length: 20 }, (_, index) => ({
@@ -8,27 +41,29 @@ const UserFormContainer = () => {
     userName: `User ${index + 1}`,
     formTitle: `Form Title ${index + 1}`,
     response: Math.floor(Math.random() * 100),
-    status: ['Completed', 'Pending', 'In Progress'][Math.floor(Math.random() * 3)],
+    status: ['Completed', 'Pending', 'Rejected'][Math.floor(Math.random() * 3)],
     totalCreation: Math.floor(Math.random() * 20) + 1,
   }));
 
-  // Pagination state
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5); // Change this number to adjust rows per page
-
-  // Handle page change
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  // Handle rows per page change
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
-  // Calculate paginated data
-  const paginatedData = data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+  // Columns for DataGrid
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'userName', headerName: 'User Name', width: 150 },
+    { field: 'formTitle', headerName: 'Form Title', width: 200 },
+    { field: 'response', headerName: 'Response', width: 120 },
+    {
+      field: 'status',
+      headerName: 'Status',
+      width: 150,
+      renderCell: (params) => (
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <StatusIndicator status={params.value} />
+          <Typography>{params.value}</Typography>
+        </Box>
+      ),
+    },
+    { field: 'totalCreation', headerName: 'Total Creation', width: 150 },
+  ];
 
   return (
     <Box
@@ -47,45 +82,21 @@ const UserFormContainer = () => {
           boxShadow: 3,
           borderRadius: 1,
           width: { xs: '100%', sm: '90%', md: '750px' }, // Adjust width based on screen size
-          height: { xs: 'auto', md: '440px' }, // Adjust height based on screen size
+          height: '440px',
           marginTop: '10px',
         }}
       >
-        <TableContainer>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>ID</TableCell>
-                <TableCell>User Name</TableCell>
-                <TableCell>Form Title</TableCell>
-                <TableCell>Response</TableCell>
-                <TableCell>Status</TableCell>
-                <TableCell>Total Creation</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {paginatedData.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell>{row.id}</TableCell>
-                  <TableCell>{row.userName}</TableCell>
-                  <TableCell>{row.formTitle}</TableCell>
-                  <TableCell>{row.response}</TableCell>
-                  <TableCell>{row.status}</TableCell>
-                  <TableCell>{row.totalCreation}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 20]}
-          component="div"
-          count={data.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
+        <div style={{ height: '100%', width: '100%' }}>
+          <DataGrid
+            rows={data}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5, 10, 20]}
+            checkboxSelection
+            disableSelectionOnClick
+            sx={{ border: 0 }}
+          />
+        </div>
       </Paper>
     </Box>
   );

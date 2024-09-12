@@ -29,9 +29,9 @@ const LineCHart= () => {
   const data = view === 'Weekly' ? weeklyData : [];
 
   return (
-    <Box>
-      <Typography>Analytics Report</Typography>
-    <div style={{ backgroundColor: "#FFFFFF", width: '350px', height: '400px',marginTop:"10px", boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)', padding: '20px' }}>
+    <Box sx={{mt:6}}>
+      <Typography variant="h6" sx={{ marginBottom: '5px' }}>Analytics Report</Typography>
+    <div style={{ backgroundColor: "#FFFFFF", width: '350px', height: '400px', boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)', padding: '20px' }}>
      <Box sx={{ display: 'flex', flexDirection: 'column', width: '300px' }}>
       {/* Active Users */}
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
