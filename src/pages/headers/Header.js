@@ -83,20 +83,17 @@ const Header = () => {
               horizontal: 'right',
             }}
           >
-            <Box sx={{ width: 200, p: 2 }}>
-              <Typography variant="h6" gutterBottom>
-                {currentUser.name}
-              </Typography>
-              <Divider />
-              <MenuItem onClick={handleClose}>
-                <span>{currentUser.firstName} {currentUser.lastName}</span>
+            <Box sx={{ width: 200}}>
+              
+            
+              <MenuItem>
+              <span>{currentUser.firstName} {currentUser.lastName}</span>
               </MenuItem>
+              <Divider />
               <MenuItem onClick={handleClose}>
                 <ExitToApp sx={{ mr: 1 }} /> Logout
               </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <ExitToApp sx={{ mr: 1 }} /> Exit
-              </MenuItem>
+             
             </Box>
           </Popover>
         </Box>
