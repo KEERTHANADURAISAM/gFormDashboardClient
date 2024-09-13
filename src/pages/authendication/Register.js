@@ -14,6 +14,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { userRegister } from "../slices/userAuth";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -75,9 +76,11 @@ const Register = () => {
                 </Typography>
               </Grid>
               <Grid item xs={6} style={{ textAlign: "right" }}>
+                <Link to='/login' className="Link">
                 <Typography variant="body2" component="div">
                   Already have an account?
                 </Typography>
+                </Link>
               </Grid>
             </Grid>
 

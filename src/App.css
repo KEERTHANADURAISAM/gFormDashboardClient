@@ -7,6 +7,7 @@ body{
 }
 .Link{
   text-decoration: none;
+  color: black;
 }
 .HomeLayoutComponents{
   display: flex;

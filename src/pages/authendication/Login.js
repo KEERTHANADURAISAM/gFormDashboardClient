@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { useSelector } from "react-redux";
 import { userRegister } from "../slices/userAuth";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const currentUser = useSelector((State) => State.user);
@@ -69,9 +70,11 @@ const Login = () => {
                 </Typography>
               </Grid>
               <Grid item xs={6} style={{ textAlign: "right" }}>
+              <Link to='/' className="Link">
                 <Typography variant="body2" component="div">
                   Don't have an account?
                 </Typography>
+                </Link>
               </Grid>
             </Grid>
 
@@ -124,6 +127,7 @@ const Login = () => {
                 alignItems: "center",
               }}
             >
+               <Link to='/dashboard' className="Link">
               <Button
                 variant="contained"
                 type="submit"
@@ -137,6 +141,7 @@ const Login = () => {
               >
                 SignIn
               </Button>
+              </Link>
             </Grid>
           </FormControl>
         </form>
